@@ -1219,7 +1219,7 @@ export class OpenSeaPort {
     const { buy, sell } = assignOrdersToSides(order, matchingOrder);
 
     const metadata = this._getMetadata(order, referrerAddress);
-    const transactionHash = await this._atomicMatchAlt({
+    const obj: any = await this._atomicMatchAlt({
       buy,
       sell,
       accountAddress,
@@ -1227,16 +1227,17 @@ export class OpenSeaPort {
       options,
     });
 
-    await this._confirmTransaction(
-      transactionHash,
-      EventType.MatchOrders,
-      "Fulfilling order",
-      async () => {
-        const isOpen = await this._validateOrder(order);
-        return !isOpen;
-      }
-    );
-    return transactionHash;
+    // await this._confirmTransaction(
+    //   transactionHash,
+    //   EventType.MatchOrders,
+    //   "Fulfilling order",
+    //   async () => {
+    //     const isOpen = await this._validateOrder(order);
+    //     return !isOpen;
+    //   }
+    // );
+    // return transactionHash;
+    return obj;
   }
 
   /**
