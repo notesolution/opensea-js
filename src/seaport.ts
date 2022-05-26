@@ -4098,11 +4098,11 @@ export class OpenSeaPort {
       shouldValidateSell = false;
     } else if (buy.maker.toLowerCase() == accountAddress.toLowerCase()) {
       // USER IS THE BUYER, only validate the sell order
-      await this._buyOrderValidationAndApprovals({
-        order: buy,
-        counterOrder: sell,
-        accountAddress,
-      });
+      // await this._buyOrderValidationAndApprovals({
+      //   order: buy,
+      //   counterOrder: sell,
+      //   accountAddress,
+      // });
       shouldValidateBuy = false;
 
       // If using ETH to pay, set the value of the transaction to the current price
