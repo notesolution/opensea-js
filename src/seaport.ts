@@ -4300,20 +4300,20 @@ export class OpenSeaPort {
       shouldValidateBuy = false;
 
       // If using ETH to pay, set the value of the transaction to the current price
-      if (buy.paymentToken == NULL_ADDRESS) {
-        value = await this._getRequiredAmountForTakingSellOrder(sell);
-      }
+      // if (buy.paymentToken == NULL_ADDRESS) {
+      //   value = await this._getRequiredAmountForTakingSellOrder(sell);
+      // }
     } else {
       // User is neither - matching service
     }
 
-    await this._validateMatch({
-      buy,
-      sell,
-      accountAddress,
-      shouldValidateBuy,
-      shouldValidateSell,
-    });
+    // await this._validateMatch({
+    //   buy,
+    //   sell,
+    //   accountAddress,
+    //   shouldValidateBuy,
+    //   shouldValidateSell,
+    // });
 
     this._dispatch(EventType.MatchOrders, {
       buy,
@@ -4324,7 +4324,7 @@ export class OpenSeaPort {
 
     let txHash;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const txnData: any = { from: accountAddress, value };
+    const txnData: any = { from: accountAddress, value, sell };
     const args: WyvernAtomicMatchParameters = [
       [
         buy.exchange,
