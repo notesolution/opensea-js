@@ -2298,7 +2298,7 @@ export class OpenSeaPort {
     }: { buy: Order; sell: Order; accountAddress: string; metadata?: string },
     retries = 1
   ): Promise<number | undefined> {
-    let value: BigNumber | undefined;
+    let value: any | undefined;
     if (
       buy.maker.toLowerCase() == accountAddress.toLowerCase() &&
       buy.paymentToken == NULL_ADDRESS
