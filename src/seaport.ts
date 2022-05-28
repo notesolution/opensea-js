@@ -1202,13 +1202,11 @@ export class OpenSeaPort {
     accountAddress,
     recipientAddress,
     referrerAddress,
-    options,
   }: {
     order: Order;
     accountAddress: string;
     recipientAddress?: string;
     referrerAddress?: string;
-    options?: any;
   }): Promise<string> {
     const matchingOrder = this._makeMatchingOrder({
       order,
@@ -1224,7 +1222,6 @@ export class OpenSeaPort {
       sell,
       accountAddress,
       metadata,
-      options,
     });
 
     // await this._confirmTransaction(
@@ -4270,13 +4267,11 @@ export class OpenSeaPort {
     sell,
     accountAddress,
     metadata = NULL_BLOCK_HASH,
-    options = {},
   }: {
     buy: Order;
     sell: Order;
     accountAddress: string;
     metadata?: string;
-    options?: any;
   }) {
     let value;
     let shouldValidateBuy = true;
@@ -4322,7 +4317,6 @@ export class OpenSeaPort {
       matchMetadata: metadata,
     });
 
-    let txHash;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const txnData: any = { from: accountAddress, value };
     const args: WyvernAtomicMatchParameters = [
@@ -4408,8 +4402,6 @@ export class OpenSeaPort {
         .estimateGasAsync(txnData);
 
       txnData.gas = this._correctGasAmount(gasEstimate);
-      // TODO: test is it possible to overwrite txnData in this way
-      Object.assign(txnData, options);
     } catch (error) {
       console.error(`Failed atomic match with args: `, args, error);
       throw new Error(
